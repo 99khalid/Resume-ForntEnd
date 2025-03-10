@@ -1,0 +1,72 @@
+<div class="container mt-4">
+  <h2>Resume Details</h2>
+
+  <!-- بيانات أساسية -->
+  <div class="mb-3">
+    <label class="form-label">Full Name</label>
+    <input type="text" class="form-control" [(ngModel)]="resume.fullName">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input type="email" class="form-control" [(ngModel)]="resume.email">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Phone Number</label>
+    <input type="text" class="form-control" [(ngModel)]="resume.phoneNumber">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Address</label>
+    <input type="text" class="form-control" [(ngModel)]="resume.address">
+  </div>
+
+  <!-- قسم التعليم -->
+  <h4>Education</h4>
+  <div *ngFor="let edu of resume.educations; let i = index" class="border p-3 mb-3">
+    <input type="text" class="form-control mb-2" placeholder="Institution Name" [(ngModel)]="edu.institutionName">
+    <input type="text" class="form-control mb-2" placeholder="Degree" [(ngModel)]="edu.degree">
+    <input type="date" class="form-control mb-2" placeholder="Start Date" 
+           [ngModel]="formatDate(edu.startDate)" 
+           (ngModelChange)="edu.startDate = $event">
+    <input type="date" class="form-control mb-2" placeholder="End Date" 
+           [ngModel]="formatDate(edu.endDate)" 
+           (ngModelChange)="edu.endDate = $event">
+    <button class="btn btn-danger btn-sm" (click)="resume.educations.splice(i, 1)">Remove</button>
+  </div>
+  <button class="btn btn-secondary" (click)="resume.educations.push({ institutionName: '', degree: '', startDate: '', endDate: '' })">+ Add Education</button>
+
+  <!-- قسم المهارات -->
+  <h4 class="mt-4">Skills</h4>
+  <div *ngFor="let skill of resume.skills; let i = index" class="d-flex align-items-center mb-2">
+    <input type="text" class="form-control me-2" placeholder="Skill Name" [(ngModel)]="skill.skillName">
+    <button class="btn btn-danger btn-sm" (click)="resume.skills.splice(i, 1)">Remove</button>
+  </div>
+  <button class="btn btn-secondary" (click)="resume.skills.push({ skillName: '' })">+ Add Skill</button>
+
+  <!-- قسم الخبرات -->
+  <h4 class="mt-4">Experience</h4>
+  <div *ngFor="let exp of resume.experiences; let i = index" class="border p-3 mb-3">
+    <input type="text" class="form-control mb-2" placeholder="Company Name" [(ngModel)]="exp.companyName">
+    <input type="text" class="form-control mb-2" placeholder="Job Title" [(ngModel)]="exp.jobTitle">
+    <input type="date" class="form-control mb-2" placeholder="Start Date" 
+           [ngModel]="formatDate(exp.startDate)" 
+           (ngModelChange)="exp.startDate = $event">
+    <input type="date" class="form-control mb-2" placeholder="End Date" 
+           [ngModel]="formatDate(exp.endDate)" 
+           (ngModelChange)="exp.endDate = $event">
+    <textarea class="form-control mb-2" placeholder="Description" [(ngModel)]="exp.description"></textarea>
+    <button class="btn btn-danger btn-sm" (click)="resume.experiences.splice(i, 1)">Remove</button>
+  </div>
+  <button class="btn btn-secondary" (click)="resume.experiences.push({ companyName: '', jobTitle: '', startDate: '', endDate: '', description: '' })">+ Add Experience</button>
+  <div class="card p-3 mb-4">
+    <h4 class="fw-bold">Upload Resume</h4>
+    <input type="file" class="form-control"  (change)="onFileChange($event)" />
+    <div class="small text-muted mt-2">Upload your CV (PDF). Max file size 50 MB.</div>
+  </div>
+  <!-- زر حفظ التعديلات -->
+  <div class="text-center mt-4">
+    <button class="btn btn-success" (click)="updateResume()">Save Changes</button>
+  </div>
+</div>

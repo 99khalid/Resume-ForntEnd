@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/landing">🏠 Resume App</a>
+  
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item" *ngIf="isLoggedIn">
+            <a class="nav-link" routerLink="/resume-list">📜 Resumes</a>
+          </li>
+          <li class="nav-item" *ngIf="isLoggedIn">
+            <a class="nav-link" routerLink="/resume-form">📝 Add Resume</a>
+          </li>
+
+  
+          <!-- ✅ إظهار زر تسجيل الدخول إذا لم يكن المستخدم مسجلاً -->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" *ngIf="!isLoggedIn" routerLink="/login">Login</a>
+            </li>
+            <li class="nav-item" *ngIf="isLoggedIn">
+                <button class="nav-link btn btn-danger text-white px-3" (click)="logout()">🚪 Logout</button>
+              </li>
+          </ul>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
